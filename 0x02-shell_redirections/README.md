@@ -24,3 +24,4 @@ Display lines containing the pattern “root” and 3 lines after them in the fi
 Advanced 1 : Find all empty files and directories in the current directory and all sub-directories.
 Advanced 2 : list all the files with a .gif extension in the current directory and all its sub-directories
 Advanced 3 : decode acrostics that use the first letter of each line.
+Advanced 4 : parse web servers logs in TSV format as input and displays the 11 hosts or IP addresses which did the most requests.
