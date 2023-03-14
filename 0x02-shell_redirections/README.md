@@ -15,3 +15,4 @@ Tasks Shell Redirections
 14 : Display lines containing the pattern “root” from the file /etc/passwd
 15 : count number lines containing a word in specific file
 Display lines containing the pattern “root” and 3 lines after them in the file /etc/passwd.
+17 : Display all the lines in the file /etc/passwd that do not contain the pattern bin
