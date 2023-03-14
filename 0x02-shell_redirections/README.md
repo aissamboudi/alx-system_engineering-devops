@@ -5,3 +5,4 @@ Tasks Shell Redirections
 4. Last lines of a file : Display the last 10 lines of /etc/passwd
 5. I'd prefer the first ones actually : Display the first 10 lines of /etc/passwd
 6. Line 2 : display the third line of the file iacta
+7 : Create a file
