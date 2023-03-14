@@ -10,3 +10,4 @@ Tasks Shell Redirections
 9: duplicate last line of iacta file
 10 : delete all js files in the current directory and all its subfolders.
 11 : count the number of directories and sub-directories in the current directory
+12 : display the 10 newest files in the current directory
