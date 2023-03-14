@@ -9,3 +9,4 @@ Tasks Shell Redirections
 8 : write ls -la in a file ls_cwd_content
 9: duplicate last line of iacta file
 10 : delete all js files in the current directory and all its subfolders.
+11 : count the number of directories and sub-directories in the current directory
