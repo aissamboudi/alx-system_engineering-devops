@@ -22,3 +22,4 @@ Display lines containing the pattern “root” and 3 lines after them in the fi
 21 : Write a script that reverse its input.
 22 : display all users and their home directories, sorted by users.
 Advanced 1 : Find all empty files and directories in the current directory and all sub-directories.
+Advanced 2 : list all the files with a .gif extension in the current directory and all its sub-directories
