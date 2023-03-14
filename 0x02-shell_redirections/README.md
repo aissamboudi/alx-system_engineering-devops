@@ -7,3 +7,4 @@ Tasks Shell Redirections
 6. Line 2 : display the third line of the file iacta
 7 : Create a file
 8 : write ls -la in a file ls_cwd_content
+9: duplicate last line of iacta file
