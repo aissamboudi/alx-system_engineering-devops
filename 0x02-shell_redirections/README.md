@@ -6,3 +6,4 @@ Tasks Shell Redirections
 5. I'd prefer the first ones actually : Display the first 10 lines of /etc/passwd
 6. Line 2 : display the third line of the file iacta
 7 : Create a file
+8 : write ls -la in a file ls_cwd_content
