@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# if 9, say Hi if 9, say Hi if 9, say Hi if 9, say Hi 
 count=0
 
 while [ $count -lt 10 ]
