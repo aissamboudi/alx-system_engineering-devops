@@ -1,29 +1,28 @@
 #!/usr/bin/env bash
 # Configures Nginx and redirection 301
 
-# starting install nginx
-sudo apt-get update -y -qq && \
-	         sudo apt-get install nginx -y
+# Update package lists and install nginx
+sudo apt-get update -y -qq && sudo apt-get install nginx -y
 
-# starting nginx service
-sudo service start nginx
+# Start the Nginx service
+sudo systemctl start nginx
 
-# allowing nginx on firewall
+# Allow Nginx on the firewall
 sudo ufw allow 'Nginx HTTP'
 
-# Give the user ownership to website files for easy editing
+# Give the user ownership of website files for easy editing
 sudo chown -R "$USER":"$USER" /var/www/html
 sudo chmod -R 755 /var/www
 
-# Creating new index
-sudo echo -e "Hello World!" | dd status=none of=/var/www/html/index.html
+# Create a new index file
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-sudo chmod o+w /etc/nginx/sites-available
-# Setting up /redirect_me to a youtube video
-sudo sed -i '24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+# Setting up /redirect_me to redirect to a YouTube video
+sudo sed -i '/^server {/a \\tlocation = /redirect_me {\n\t\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\t}\n' /etc/nginx/sites-available/default
 
 # Reload Nginx to apply the changes
 echo "Reloading Nginx..."
 sudo systemctl restart nginx
 
 echo "Redirection setup completed successfully."
+
