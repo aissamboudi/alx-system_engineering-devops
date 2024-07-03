@@ -28,7 +28,7 @@ sudo chmod o+w /etc/nginx/sites-available
 
 # Create the configuration file with redirection rule
 echo "Creating Nginx configuration file..."
-sudo  cat <<EOL > $CONFIG_FILE
+cat <<EOL > $CONFIG_FILE
 server {
         listen 80;
         listen [::]:80;
