@@ -1,0 +1,58 @@
+onfigures Nginnx
+
+# Define variables
+CONFIG_FILE="/etc/nginx/sites-available/redirect.conf"
+SYMLINK="/etc/nginx/sites-enabled/redirect.conf"
+REDIRECT_URL="https://www.youtube.com/watch?v=QH2-TGUlwu4"
+SERVER_NAME="aissamboudi.tech"
+
+sudo apt-get update -y -qq && \
+	         sudo apt-get install nginx -y
+
+echo -e "\nSetting up some minor stuff.\n"
+
+# starting nginx service
+sudo service nginx start
+
+# allowing nginx on firewall
+sudo ufw allow 'Nginx HTTP'
+
+# Give the user ownership to website files for easy editing
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+
+# Creating new index
+echo -e "Hello World!" | dd status=none of=/var/www/html/index.html
+
+# change permissions
+sudo chmod o+w /etc/nginx/sites-available
+
+# Create the configuration file with redirection rule
+echo "Creating Nginx configuration file..."
+sudo  cat <<EOL > $CONFIG_FILE
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name $SERVER_NAME;
+        root /var/www/html/;
+        index index.html;
+        # Add this section for redirection
+        location = /redirect_me {
+                return 301 $REDIRECT_URL;
+        }
+}
+EOL
+# Create a symlink in sites-enabled
+echo "Creating symlink to enable the configuration..."
+sudo ln -s $CONFIG_FILE $SYMLINK
+
+# Test the Nginx configuration for syntax errors
+echo "Testing Nginx configuration..."
+sudo nginx -t
+
+# Reload Nginx to apply the changes
+echo "Reloading Nginx..."
+sudo systemctl reload nginx
+
+echo "Redirection setup completed successfully."
