@@ -1,4 +1,5 @@
-onfigures Nginnx
+#!/usr/bin/env bash
+## Configures Nginx and redirection
 
 # Define variables
 CONFIG_FILE="/etc/nginx/sites-available/redirect.conf"
@@ -8,8 +9,6 @@ SERVER_NAME="aissamboudi.tech"
 
 sudo apt-get update -y -qq && \
 	         sudo apt-get install nginx -y
-
-echo -e "\nSetting up some minor stuff.\n"
 
 # starting nginx service
 sudo service nginx start
