@@ -6,7 +6,7 @@ sudo apt-get update -y -qq && \
 	         sudo apt-get install nginx -y
 
 # starting nginx service
-sudo service nginx start
+sudo service start nginx
 
 # allowing nginx on firewall
 sudo ufw allow 'Nginx HTTP'
@@ -18,11 +18,12 @@ sudo chmod -R 755 /var/www
 # Creating new index
 sudo echo -e "Hello World!" | dd status=none of=/var/www/html/index.html
 
+sudo chmod o+w /etc/nginx/sites-available
 # Setting up /redirect_me to a youtube video
 sudo sed -i '24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
 
 # Reload Nginx to apply the changes
 echo "Reloading Nginx..."
-sudo systemctl reload nginx
+sudo systemctl restart nginx
 
 echo "Redirection setup completed successfully."
