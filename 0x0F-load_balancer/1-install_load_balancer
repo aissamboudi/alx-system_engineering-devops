@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Installs and setup HAProxy
+
+set -e
+
+# Install necessary packages
+apt-get update
+apt-get install -y software-properties-common
+
+# Add HAProxy repository and install HAProxy
+add-apt-repository -y ppa:vbernat/haproxy-2.9
+apt-get update
+apt-get install -y haproxy=2.9.*
+
+# Enable HAProxy
+echo "ENABLED=1" > /etc/default/haproxy
+
+# Configure HAProxy
+cat <<EOL >> /etc/haproxy/haproxy.cfg
+listen load_balancer
+   bind *:80
+   mode http
+   balance roundrobin
+   option httpclose
+   option forwardfor
+   server 389182-web-01 54.173.204.114:80 check
+   server 389182-web-02 18.214.88.79:80 check
+EOL
+
+# Verify HAProxy configuration
+haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Start HAProxy service
+service haproxy start
+
+echo "HAProxy installation and setup complete."
