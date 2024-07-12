@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Installs and setup HAProxy
 
-set -e
-
 # Install necessary packages
 apt-get update
 apt-get install -y software-properties-common
@@ -17,9 +15,6 @@ echo "ENABLED=1" > /etc/default/haproxy
 
 # Configure HAProxy
 cat <<EOL >> /etc/haproxy/haproxy.cfg
-listen load_balancer
-   bind *:80
-   mode http
    balance roundrobin
    option httpclose
    option forwardfor
@@ -27,8 +22,9 @@ listen load_balancer
    server 389182-web-02 18.214.88.79:80 check
 EOL
 
-# Verify HAProxy configuration
-haproxy -c -f /etc/haproxy/haproxy.cfg
+
+
+sudo sed -i "$a\/frontend webF\n\tbind *:80\n\tmode http\n\tdefault_backend webB\nbackend webB\n\tmode http\n\tbalance roundrobin\n\tserver 389182-web-01 54.173.204.114:80 check\n\tserver 389182-web-02 18.214.88.79:80 check" /etc/haproxy/haproxy.cfg
 
 # Start HAProxy service
 service haproxy start
