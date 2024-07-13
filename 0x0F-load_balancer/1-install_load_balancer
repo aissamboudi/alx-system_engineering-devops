@@ -2,6 +2,14 @@
 # Installs and setup HAProxy
 
 # Install necessary packages
+sudo systemctl stop haproxy
+sudo apt-get remove --purge haproxy
+sudo rm -rf /etc/haproxy
+sudo rm -rf /var/lib/haproxy
+sudo rm -rf /var/log/haproxy
+sudo rm /var/log/haproxy*
+sudo systemctl daemon-reload
+
 sudo apt-get update -y
 sudo apt-get install -y software-properties-common
 
@@ -22,4 +30,4 @@ sudo sed -i '$a\frontend webF\n\tbind *:80\n\tmode http\n\tdefault_backend webB\
  #Start HAProxy service
 
  sudo service haproxy start
- #sudo service haproxy restart
+ sudo service haproxy restart
