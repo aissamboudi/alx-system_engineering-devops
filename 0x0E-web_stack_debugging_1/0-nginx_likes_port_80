@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This script fix Nginx port 80 issue
 
-sudo rm /etc/nginx/sites-enabled/default
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx restart
+sudo service nginx stop
+sudo n -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx start
