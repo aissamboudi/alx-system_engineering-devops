@@ -1,10 +1,14 @@
 #!/usr/bin/python3
-"""contains the definiton of number_of_subscribers function"""
+"""0-subs module
+contains the definiton of number_of_subscribers function
+"""
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """Return the total number of subscribers on a given subreddit."""
+    """number_of_subscribers
+    queries the Reddit API and returns the number of subscribers
+    If not a valid subreddit, return 0."""
     url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
     response = requests.get(url, allow_redirects=False)
     if response.ok:
