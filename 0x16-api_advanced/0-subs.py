@@ -8,6 +8,11 @@ def number_of_subscribers(subreddit):
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     res = requests.get(url, allow_redirects=False)
     try:
-        return res.json().get("data").get("subscribers")
-    except requests.RequestException:
+        res = requests.get(url, allow_redirects=False)
+        res.raise_for_status()  # Check for HTTP errors
+        data = res.json()
+        return data.get("data", {}).get("subscribers", 0)
+    except requests.exceptions.RequestException:
+        return 0
+    except ValueError:
         return 0
