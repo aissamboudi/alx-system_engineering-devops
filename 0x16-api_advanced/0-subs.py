@@ -5,16 +5,9 @@ import requests
 
 def number_of_subscribers(subreddit):
     """Return the total number of subscribers on a given subreddit."""
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {
-            "User-Agent": "Linux/5.15.0-1037-generic Ubuntu/22.04 (jammy)"
-            }
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    res = requests.get(url, allow_redirects=False)
     try:
-        response = requests.get(url, headers=headers, allow_redirects=False, timeout=10)
-        if response.status_code == 200:
-            results = response.json().get("data", {})
-            return results.get("subscribers", 0)
-        else:
-            return 0
+        return res.json().get("data").get("subscribers")
     except requests.RequestException:
         return 0
